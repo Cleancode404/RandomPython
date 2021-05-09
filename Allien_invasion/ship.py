@@ -5,6 +5,7 @@ class Ship():
         """
         initialize the ship and set its starting position
         """
+        self.screen = screen
 
         #load the ship image and get its rect
         self.image = pygame.image.load('Images/ship.bmp')
