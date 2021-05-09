@@ -15,6 +15,8 @@ def run_game():
     while True:
 
         #watch for keyboard adn mouse events.
+        #redraw the screen during each pass through th eloop
+        screen.fill(bg_color)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
