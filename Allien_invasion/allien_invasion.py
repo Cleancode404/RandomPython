@@ -28,9 +28,9 @@ def run_game():
         screen.fill(ai_settings.bg_color)
         ship.blitme()
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
+        #for event in pygame.event.get():
+            #if event.type == pygame.QUIT:
+                #sys.exit()
         
         #make the most recently drawn screen visible
 
