@@ -1,6 +1,7 @@
 import sys
 import pygame
 from settings import Settings 
+from ship import Ship
 
 def run_game():
     #initialize game and create a screen object
@@ -12,20 +13,26 @@ def run_game():
         (ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Allien Invasion")
 
+    #creat a ship
+    ship = Ship(screen)
+
+
     #set background color
     bg_color = (230, 230, 230)
 
     #start the main loop for the game
     while True:
 
-        #watch for keyboard adn mouse events.
+        #watch for keyboard and mouse events.
         #redraw the screen during each pass through th eloop
         screen.fill(ai_settings.bg_color)
+        ship.blitme()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
         
-        #make th emost recently drawn screen visible
+        #make the most recently drawn screen visible
 
         pygame.display.flip()
 
