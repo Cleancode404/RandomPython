@@ -1,59 +1,68 @@
 import sys
+
 import pygame
-from settings import Settings 
+
+from settings import Settings
 from ship import Ship
-import game_functions as gf 
-from pygame.sprite import Group
 
-def run_game():
-    #initialize game and create a screen object
+class AlienInvasion:
+    """Overall class to manage game assets and behavior."""
 
-    pygame.init()
-    ai_settings = Settings()
+    def __init__(self):
+        """Initialize the game, and create game resources."""
+        pygame.init()
+        self.settings = Settings()
 
-    screen = pygame.display.set_mode(
-        (ai_settings.screen_width, ai_settings.screen_height))
-    pygame.display.set_caption("Allien Invasion")
+        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height
+        pygame.display.set_caption("Alien Invasion")
 
-    #creat a ship
-    ship = Ship(ai_settings, screen)
-    
+        self.ship = Ship(self)
 
-    #set background color
-    bg_color = (230, 230, 230)
 
-    #make a group to store bullets in
-    bullets = Group()
+    def run_game(self):
+        """Start the main loop for the game."""
+        while True:
+            self._check_events()
+            self.ship.update()
+            self._update_screen()
 
-    #start the main loop for the game
-    while True:
+    def _check_events(self):
+        """Respond to keypresses and mouse events."""
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                self._check_keydown_events(event)
+            elif event.type == pygame.KEYUP:
+                self._check_keyup_events(event)
 
-        gf.check_events(ship)
-        
-        gf.update_screen(ai_settings, screen, ship, bullets)
-        ship.update()
-        bullets.update()
+    def _check_keydown_events(self, event):
+        """Respond to keypresses."""
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = True
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = True
+        elif event.key == pygame.K_q:
+            sys.exit()
 
-        #get rid of bullets that disappeared
-        for bullet in bullets.copy():
-            if bullet.rect.bottom <= 0:
-                bullets.remove(bullet)
-        print(len(bullets))
+    def _check_keyup_events(self, event):
+        """Respond to key releases."""
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = False
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = False
 
-        
-        gf.update_screen(ai_settings, screen, ship, bullets)
-
-        #watch for keyboard and mouse events.
-        #redraw the screen during each pass through th eloop
-        screen.fill(ai_settings.bg_color)
-        ship.blitme()
-
-        #for event in pygame.event.get():
-            #if event.type == pygame.QUIT:
-                #sys.exit()
-        
-        #make the most recently drawn screen visible
+    def _update_screen(self):
+        """Update images on the screen, and flip to the new screen."""
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()
 
         pygame.display.flip()
 
-run_game()
+
+if __name__ == '__main__':
+    # Make a game instance, and run the game.
+    ai = AlienInvasion()
+    ai.run_game()
