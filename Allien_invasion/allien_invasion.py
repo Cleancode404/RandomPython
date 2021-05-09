@@ -1,5 +1,6 @@
 import sys
 import pygame
+from settings import Settings 
 
 def run_game():
     #initialize game and create a screen object
@@ -7,7 +8,8 @@ def run_game():
     pygame.init()
     ai_settings = Settings()
 
-    screen = pygame.display.set_mode((ai_settings.screen_width, ai_settings.screen_height))
+    screen = pygame.display.set_mode(
+        (ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Allien Invasion")
 
     #set background color
@@ -18,7 +20,7 @@ def run_game():
 
         #watch for keyboard adn mouse events.
         #redraw the screen during each pass through th eloop
-        screen.fill(bg_color)
+        screen.fill(ai_settings.bg_color)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
