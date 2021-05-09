@@ -26,6 +26,7 @@ def run_game():
     while True:
 
         gf.check_events()
+        gf.update_screen(ai_settings, screen, ship)
 
         #watch for keyboard and mouse events.
         #redraw the screen during each pass through th eloop
