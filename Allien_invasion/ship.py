@@ -19,11 +19,15 @@ class Ship():
 
         #movemnt flag
         self.moving_right = False
-        
+        self.moving_left = False
+
     def update(self):
         "update ship location base on the movement flag"
         if self.moving_right:
             self.rect.centerx += 1
+
+        if self.moving_left:
+            self.rect.centerx -= 1
 
     def blitme(self):
         "Draw the ship at its current location"
