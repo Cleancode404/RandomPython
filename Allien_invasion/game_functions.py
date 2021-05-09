@@ -29,6 +29,13 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
             new_bullet = Bullet(ai_settings, screen, ship)
             bullets.add(new_bullet)
 
+def update_bullets(bullets):
+    """"update position of bullets and get rid of old bullets """
+    #update bullet position
+    for bullet in bullets.copy():
+            if bullet.rect.bottom <= 0:
+                bullets.remove(bullet)
+
 def check_keyup_events(event, ship):
         """respond to keypressses """
         if event.key == pygame.K_RIGHT:
