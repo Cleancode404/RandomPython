@@ -3,7 +3,7 @@ import pygame
 from settings import Settings 
 from ship import Ship
 import game_functions as gf 
-
+from pygame.sprite import Group
 
 def run_game():
     #initialize game and create a screen object
@@ -22,13 +22,19 @@ def run_game():
     #set background color
     bg_color = (230, 230, 230)
 
+    #make a group to store bullets in
+    bullets = Group()
+
     #start the main loop for the game
     while True:
 
         gf.check_events(ship)
+        
+        gf.update_screen(ai_settings, screen, ship, bullets)
         ship.update()
-        gf.update_screen(ai_settings, screen, ship)
-
+        bullets.update()
+        gf.update_screen(ai_settings, screen, ship, bullets)
+        
         #watch for keyboard and mouse events.
         #redraw the screen during each pass through th eloop
         screen.fill(ai_settings.bg_color)
