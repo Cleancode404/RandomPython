@@ -33,8 +33,16 @@ def run_game():
         gf.update_screen(ai_settings, screen, ship, bullets)
         ship.update()
         bullets.update()
-        gf.update_screen(ai_settings, screen, ship, bullets)
+
+        #get rid of bullets that disappeared
+        for bullet in bullets.copy():
+            if bullet.rect.bottom <= 0:
+                bullets.remove(bullet)
+        print(len(bullets))
+
         
+        gf.update_screen(ai_settings, screen, ship, bullets)
+
         #watch for keyboard and mouse events.
         #redraw the screen during each pass through th eloop
         screen.fill(ai_settings.bg_color)
