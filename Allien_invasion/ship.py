@@ -19,19 +19,23 @@ class Ship():
 
         #store a decimal value for the ship's center
         self.center = float(self.rect.centerx)
-        
+
         #movemnt flag
         self.moving_right = False
         self.moving_left = False
 
     def update(self):
         "update ship location base on the movement flag"
+        #update the ship's center value, not the rectangle
         if self.moving_right:
-            self.rect.centerx += 1
+            self.rect.centerx += self.ai_settings.ship_soeed_factor
 
         if self.moving_left:
-            self.rect.centerx -= 1
-
+            self.rect.centerx -= self.ai_settings.ship_soeed_factor
+        
+        #update rect object from self.center
+        self.rect.centerx = self.center 
+        
     def blitme(self):
         "Draw the ship at its current location"
         self.screen.blit(self.image, self.rect)
