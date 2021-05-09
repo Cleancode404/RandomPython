@@ -16,8 +16,8 @@ def run_game():
     pygame.display.set_caption("Allien Invasion")
 
     #creat a ship
-    ship = Ship(screen)
-
+    ship = Ship(ai_settings, screen)
+    
 
     #set background color
     bg_color = (230, 230, 230)
