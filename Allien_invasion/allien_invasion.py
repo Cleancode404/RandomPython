@@ -5,7 +5,9 @@ def run_game():
     #initialize game and create a screen object
 
     pygame.init()
-    screen = pygame.display.set_mode((1200, 800))
+    ai_settings = Settings()
+
+    screen = pygame.display.set_mode((ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Allien Invasion")
 
     #set background color
