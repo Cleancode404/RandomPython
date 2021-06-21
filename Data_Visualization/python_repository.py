@@ -8,7 +8,15 @@ r = requests.get(url, headers = headers)
 print(f"Status code:{r.status_code}")
 
 #store API response in a variable
-repsonse_dict = r.json()
+response_dict = r.json()
+print(f"Total repositories: {response_dict['total_count']}")
 
-#process results
-print(repsonse_dict.keys())
+#explore infor about these repositories
+repo_dicts = response_dict['items']
+print(f"Repositories returned: {len(repo_dicts)}")
+
+#examin the first repository
+repo_dict = repo_dicts[0]
+print(f"\nKeys:{len(repo_dict)}")
+for key in sorted(repo_dict.keys()):
+    print(key)
