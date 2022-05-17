@@ -1,2 +1,2 @@
 # RandomPython
-collection of python in graphic, automation, networking etc
+collection of python projects in graphic, automation, networking etc
